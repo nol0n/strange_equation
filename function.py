@@ -17,27 +17,40 @@ def __new_value__(values: list, h: float, sign: int, a: float, b: float, c: floa
     x_1 = values[1]
     x_2 = values[2]
     
+    # k_1_1 = x_2
+    # f_1 = x_1 + (h / 2) * k_1_1
+    # under_sqrt = a * f_1 + b * (f_1)**2 + c * (f_1)**3
+    # # проверка на то не отрицательное ли значение будет под корнем
+    # if under_sqrt < 0:
+    #     raise Exception("попытка взятия sqrt(x), x < 0, ошибочные начальные условия")
+    # k_1_2 = math.sqrt(under_sqrt) * sign
+
+
+    # k_2_1 = x_2 + (h / 2) * k_1_2
+    # f_2 = x_1 + (h / 2) * k_2_1
+    # under_sqrt = a * f_2 + b * (f_2)**2 + c * (f_2)**3
+    # # проверка на то не отрицательное ли значение будет под корнем
+    # if under_sqrt < 0:
+    #     raise Exception("попытка взятия sqrt(x), x < 0, ошибочные начальные условия")
+    # k_2_2 = math.sqrt(under_sqrt) * sign
+
+    # new_t_1 = t_1 + h
+    # new_x_1 = x_1 + h * k_2_1
+    # new_x_2 = x_2 + h * k_2_2
+
+    # return [new_t_1, new_x_1, new_x_2]
+
     k_1_1 = x_2
     f_1 = x_1 + (h / 2) * k_1_1
-    under_sqrt = a * f_1 + b * (f_1)**2 + c * (f_1)**3
-    # проверка на то не отрицательное ли значение будет под корнем
-    if under_sqrt < 0:
-        raise Exception("попытка взятия sqrt(x), x < 0, ошибочные начальные условия")
-    k_1_2 = math.sqrt(under_sqrt) * sign
-
+    k_1_2 = ((-c) / a) * f_1 + ((-b) / a) * x_2
 
     k_2_1 = x_2 + (h / 2) * k_1_2
     f_2 = x_1 + (h / 2) * k_2_1
-    under_sqrt = a * f_2 + b * (f_2)**2 + c * (f_2)**3
-    # проверка на то не отрицательное ли значение будет под корнем
-    if under_sqrt < 0:
-        raise Exception("попытка взятия sqrt(x), x < 0, ошибочные начальные условия")
-    k_2_2 = math.sqrt(under_sqrt) * sign
+    k_2_2 = ((-c) / a) * f_2 + ((-b) / a) * x_2 + (h / 2) * k_1_2
 
-    new_t_1 = t_1 + h
     new_x_1 = x_1 + h * k_2_1
     new_x_2 = x_2 + h * k_2_2
-
+    new_t_1 = t_1 + h
     return [new_t_1, new_x_1, new_x_2]
 
 # основной метод для получаения коордиант графика

@@ -13,9 +13,9 @@ names = []
 # xd_0 - стартовая скорость
 # step_size - размер шага
 # end_t - граничное значение t в обе стороны
-results = func.calculate_plot(0, 1, 0, 
+results = func.calculate_plot(1, 0.2, 1, 
                               1, 1, 
-                              0.05, 2)
+                              0.05, 20)
 
 values.append(results[0])
 names.append("+sqrt()") 
